@@ -9,6 +9,7 @@ import notesApi from "apis/notes";
 import EmptyState from "components/Common/EmptyState";
 
 import DeleteAlert from "./DeleteAlert";
+import MenuBarNotes from "./MenuBarNotes";
 import NewNotePane from "./Pane/Create";
 import Table from "./Table";
 
@@ -19,6 +20,7 @@ const Notes = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
   const [notes, setNotes] = useState([]);
+  const [showMenu, setShowMenu] = useState(true);
 
   useEffect(() => {
     fetchNotes();
@@ -43,62 +45,69 @@ const Notes = () => {
   }
 
   return (
-    <Container>
-      <Header
-        title="Notes"
-        actionBlock={
-          <Button
-            icon="ri-add-line"
-            label="Add New Note"
-            onClick={() => setShowNewNotePane(true)}
+    <>
+      <MenuBarNotes showMenu={showMenu} />
+      <Container>
+        <Header
+          title="All Notes"
+          actionBlock={
+            <Button
+              icon="ri-add-line"
+              label="Add New Note"
+              onClick={() => setShowNewNotePane(true)}
+            />
+          }
+          menuBarToggle={() => {
+            setShowMenu(showMenu => !showMenu);
+          }}
+          searchProps={{
+            value: searchTerm,
+            onChange: e => setSearchTerm(e.target.value),
+            placeholder: "Search Name, Email, Phone Number etc.",
+          }}
+        />
+        {notes.length ? (
+          <>
+            <SubHeader
+              rightActionBlock={
+                <Button
+                  disabled={!selectedNoteIds.length}
+                  icon={Delete}
+                  label="Delete"
+                  onClick={() => setShowDeleteAlert(true)}
+                />
+              }
+            />
+            <Table
+              fetchNotes={fetchNotes}
+              notes={notes}
+              setSelectedNoteIds={setSelectedNoteIds}
+            />
+          </>
+        ) : (
+          <EmptyState
+            image={EmptyNotesListImage}
+            primaryAction={() => setShowNewNotePane(true)}
+            primaryActionLabel="Add New Note"
+            subtitle="Add your notes to send customized emails to them."
+            title="Looks like you don't have any notes!"
           />
-        }
-        searchProps={{
-          value: searchTerm,
-          onChange: e => setSearchTerm(e.target.value),
-        }}
-      />
-      {notes.length ? (
-        <>
-          <SubHeader
-            rightActionBlock={
-              <Button
-                disabled={!selectedNoteIds.length}
-                icon={Delete}
-                label="Delete"
-                onClick={() => setShowDeleteAlert(true)}
-              />
-            }
-          />
-          <Table
-            fetchNotes={fetchNotes}
-            notes={notes}
+        )}
+        <NewNotePane
+          fetchNotes={fetchNotes}
+          setShowPane={setShowNewNotePane}
+          showPane={showNewNotePane}
+        />
+        {showDeleteAlert && (
+          <DeleteAlert
+            refetch={fetchNotes}
+            selectedNoteIds={selectedNoteIds}
             setSelectedNoteIds={setSelectedNoteIds}
+            onClose={() => setShowDeleteAlert(false)}
           />
-        </>
-      ) : (
-        <EmptyState
-          image={EmptyNotesListImage}
-          primaryAction={() => setShowNewNotePane(true)}
-          primaryActionLabel="Add New Note"
-          subtitle="Add your notes to send customized emails to them."
-          title="Looks like you don't have any notes!"
-        />
-      )}
-      <NewNotePane
-        fetchNotes={fetchNotes}
-        setShowPane={setShowNewNotePane}
-        showPane={showNewNotePane}
-      />
-      {showDeleteAlert && (
-        <DeleteAlert
-          refetch={fetchNotes}
-          selectedNoteIds={selectedNoteIds}
-          setSelectedNoteIds={setSelectedNoteIds}
-          onClose={() => setShowDeleteAlert(false)}
-        />
-      )}
-    </Container>
+        )}
+      </Container>
+    </>
   );
 };
 
