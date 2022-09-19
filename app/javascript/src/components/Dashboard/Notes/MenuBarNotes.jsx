@@ -39,7 +39,6 @@ const MenuBarNotes = ({ showMenu }) => {
         <MenuBar.Block count={80} label="Europe" />
         <MenuBar.Block count={60} label="Middle-East" />
         <MenuBar.Block count={60} label="Asia" />
-        <MenuBar.AddNew label="Add New Segments" />
         <MenuBar.SubTitle
           iconProps={[
             {
@@ -65,20 +64,6 @@ const MenuBarNotes = ({ showMenu }) => {
         <MenuBar.Block count={80} label="Europe" />
         <MenuBar.Block count={60} label="Middle-East" />
         <MenuBar.Block count={60} label="Asia" />
-        <MenuBar.AddNew label="Add New Tag" />
-        <MenuBar.Item
-          description="Welcome Message, KB and Labels "
-          label="General"
-        />
-        <MenuBar.Item
-          active
-          description="Brand Color, Logo and Widget Position"
-          label="Styling"
-        />
-        <MenuBar.Item
-          description="Position, Icon and Label"
-          label="Widget Icon"
-        />
       </MenuBar>
     </div>
   );
