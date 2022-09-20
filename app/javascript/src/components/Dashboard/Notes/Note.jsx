@@ -44,7 +44,6 @@ const Note = ({ note }) => (
           user={{
             imageUrl: "https://xsgames.co/randomusers/avatar.php?g=pixel",
           }}
-          onClick={function noRefCheck() {}}
         />
       </div>
     </div>
