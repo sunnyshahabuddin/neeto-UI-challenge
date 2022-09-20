@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 
 import EmptyNotesListImage from "images/EmptyNotesList";
-import { Delete } from "neetoicons";
 import { Button, PageLoader } from "neetoui";
-import { Container, Header, SubHeader } from "neetoui/layouts";
+import { Container, Header } from "neetoui/layouts";
 
 import notesApi from "apis/notes";
 import EmptyState from "components/Common/EmptyState";
 
 import DeleteAlert from "./DeleteAlert";
-import MenuBarNotes from "./MenuBarNotes";
+import Note from "./Note";
 import NewNotePane from "./Pane/Create";
-import Table from "./Table";
+import SideMenu from "./SideMenu";
 
 const Notes = () => {
   const [loading, setLoading] = useState(true);
@@ -46,7 +45,7 @@ const Notes = () => {
 
   return (
     <>
-      <MenuBarNotes showMenu={showMenu} />
+      <SideMenu showMenu={showMenu} />
       <Container>
         <Header
           title="All Notes"
@@ -67,23 +66,7 @@ const Notes = () => {
           }}
         />
         {notes.length ? (
-          <>
-            <SubHeader
-              rightActionBlock={
-                <Button
-                  disabled={!selectedNoteIds.length}
-                  icon={Delete}
-                  label="Delete"
-                  onClick={() => setShowDeleteAlert(true)}
-                />
-              }
-            />
-            <Table
-              fetchNotes={fetchNotes}
-              notes={notes}
-              setSelectedNoteIds={setSelectedNoteIds}
-            />
-          </>
+          notes.map(note => <Note key={note.id} note={note} />)
         ) : (
           <EmptyState
             image={EmptyNotesListImage}

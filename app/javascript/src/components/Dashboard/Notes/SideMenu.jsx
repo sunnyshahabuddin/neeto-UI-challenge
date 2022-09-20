@@ -4,7 +4,7 @@ import { Search, Settings, Plus } from "neetoicons";
 import { Typography } from "neetoui";
 import { MenuBar } from "neetoui/layouts";
 
-const MenuBarNotes = ({ showMenu }) => {
+const SideMenu = ({ showMenu }) => {
   const [isSearchCollapsed, setIsSearchCollapsed] = useState(true);
 
   return (
@@ -69,4 +69,4 @@ const MenuBarNotes = ({ showMenu }) => {
   );
 };
 
-export default MenuBarNotes;
+export default SideMenu;
