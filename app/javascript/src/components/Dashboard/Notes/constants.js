@@ -1,15 +1,23 @@
+import { buildSelectOptions } from "utils";
 import * as yup from "yup";
 
 export const NOTES_FORM_INITIAL_FORM_VALUES = {
   title: "",
   description: "",
+  role: null,
+  tags: [],
 };
-
-export const NOTES_FORM_VALIDATION_SCHEMA = yup.object().shape({
-  title: yup.string().required("Title is required"),
-  description: yup.string().required("Description is required"),
-});
-
+export const TAGS = [
+  "Getting Started",
+  "Onboarding",
+  "User Flow",
+  "UX",
+  "Bugs",
+  "V2",
+].map(buildSelectOptions);
+export const ROLES = ["Software Engineer", "UI Engineer", "QA Engineer"].map(
+  buildSelectOptions
+);
 export const NOTES_TABLE_COLUMN_DATA = [
   {
     title: "Title",
@@ -24,3 +32,28 @@ export const NOTES_TABLE_COLUMN_DATA = [
     width: "70%",
   },
 ];
+
+export const NOTES_FORM_VALIDATION_SCHEMA = yup.object().shape({
+  title: yup.string().required("Title is required"),
+  description: yup.string().required("Description is required"),
+  role: yup
+    .object()
+    .nullable()
+    .required("Role is required")
+    .shape({
+      label: yup.string().oneOf(ROLES.map(role => role.label)),
+      value: yup.string().oneOf(ROLES.map(role => role.value)),
+    }),
+  tags: yup
+    .array(
+      yup
+        .object()
+        .nullable()
+        .shape({
+          label: yup.string().oneOf(TAGS.map(tag => tag.label)),
+          value: yup.string().oneOf(TAGS.map(tag => tag.value)),
+        })
+    )
+    .min(1, "At least one tag is required ")
+    .required("Tag is required"),
+});
