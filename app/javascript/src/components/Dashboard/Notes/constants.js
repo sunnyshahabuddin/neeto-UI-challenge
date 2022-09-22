@@ -21,6 +21,7 @@ export const ROLES = buildSelectOptions([
   "Software Engineer",
   "UI Engineer",
   "QA Engineer",
+  "UX-Desginer",
 ]);
 
 export const NOTES_TABLE_COLUMN_DATA = [
