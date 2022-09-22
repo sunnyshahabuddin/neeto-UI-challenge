@@ -7,17 +7,22 @@ export const NOTES_FORM_INITIAL_FORM_VALUES = {
   role: null,
   tags: [],
 };
-export const TAGS = [
+
+export const TAGS = buildSelectOptions([
   "Getting Started",
   "Onboarding",
   "User Flow",
   "UX",
   "Bugs",
   "V2",
-].map(buildSelectOptions);
-export const ROLES = ["Software Engineer", "UI Engineer", "QA Engineer"].map(
-  buildSelectOptions
-);
+]);
+
+export const ROLES = buildSelectOptions([
+  "Software Engineer",
+  "UI Engineer",
+  "QA Engineer",
+]);
+
 export const NOTES_TABLE_COLUMN_DATA = [
   {
     title: "Title",
