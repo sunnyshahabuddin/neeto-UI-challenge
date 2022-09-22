@@ -3,7 +3,7 @@ import * as R from "ramda";
 const camelize = value =>
   value
     .toLowerCase()
-    .split(" ")
+    .split(/[-_,./:\s]/)
     .reduce(
       (word, character) =>
         word + (character.charAt(0).toUpperCase() + character.slice(1))
