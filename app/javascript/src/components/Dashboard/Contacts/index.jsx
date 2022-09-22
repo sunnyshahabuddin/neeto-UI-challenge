@@ -4,6 +4,7 @@ import { Button } from "neetoui";
 import { Container, Header } from "neetoui/layouts";
 
 import SideMenu from "./SideMenu";
+import Table from "./Table";
 
 const Contacts = () => {
   const [showMenu, setShowMenu] = useState(true);
@@ -27,6 +28,7 @@ const Contacts = () => {
             placeholder: "Search Name, Email, Phone Number etc.",
           }}
         />
+        <Table />
       </Container>
     </>
   );
