@@ -57,7 +57,7 @@ const Sidebar = () => {
       }}
       profileInfo={{
         name: `${user.first_name} ${user.last_name}`,
-        imageUrl: user.profile_image_path,
+        imageUrl: "https://xsgames.co/randomusers/avatar.php?g=pixel",
         email: user.email,
         bottomLinks,
       }}
