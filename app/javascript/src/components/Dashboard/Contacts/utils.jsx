@@ -5,6 +5,7 @@ import { Dropdown, Avatar, Typography } from "neetoui";
 import { buildSelectOptions } from "utils";
 import * as yup from "yup";
 
+const { Menu, MenuItem } = Dropdown;
 const renderNameRoleAvatar = (name, { role }) => (
   <div className="flex space-x-4">
     <Avatar
@@ -23,11 +24,14 @@ const renderNameRoleAvatar = (name, { role }) => (
 
 const renderActionDropdown = setShowDeleteAlert => (
   <Dropdown buttonStyle="text" icon={MenuHorizontal} strategy="fixed">
-    <li>Edit</li>
-    <li onClick={setShowDeleteAlert}>Delete</li>
+    <Menu>
+      <MenuItem.Button style="danger" onClick={setShowDeleteAlert}>
+        Delete
+      </MenuItem.Button>
+      <MenuItem.Button>Edit</MenuItem.Button>
+    </Menu>
   </Dropdown>
 );
-
 export const buildContactTableColumnData = setShowDeleteAlert => [
   {
     dataIndex: "name",
@@ -52,7 +56,7 @@ export const buildContactTableColumnData = setShowDeleteAlert => [
     title: "",
     dataIndex: "more",
     key: "more",
-    width: "10",
+    width: "10%",
     render: () => renderActionDropdown(setShowDeleteAlert),
   },
 ];
@@ -81,7 +85,7 @@ export const ROW_DATA = [
   },
 ];
 
-export const CONTACT_FORM_INITIAL_FORM_VALUES = {
+export const INITIAL_FORM_VALUES = {
   firstName: "",
   lastName: "",
   email: "",
@@ -95,7 +99,7 @@ export const ROLES = buildSelectOptions([
   "UX-Desginer",
 ]);
 
-export const CONTACTS_FORM_VALIDATION_SCHEMA = yup.object().shape({
+export const VALIDATION_SCHEMA = yup.object().shape({
   firstName: yup.string().required("First name is required"),
   lastName: yup.string().required("Last name is required"),
   email: yup

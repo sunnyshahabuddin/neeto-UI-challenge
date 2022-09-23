@@ -5,7 +5,7 @@ import { Check } from "neetoicons";
 import { Button, Pane, Toastr } from "neetoui";
 import { Input, Select } from "neetoui/formik";
 
-import { ROLES, CONTACTS_FORM_VALIDATION_SCHEMA } from "../utils";
+import { ROLES, VALIDATION_SCHEMA } from "../utils";
 
 const Form = ({ onClose, contact }) => {
   const [submitted, setSubmitted] = useState(false);
@@ -20,7 +20,7 @@ const Form = ({ onClose, contact }) => {
       initialValues={contact}
       validateOnBlur={submitted}
       validateOnChange={submitted}
-      validationSchema={CONTACTS_FORM_VALIDATION_SCHEMA}
+      validationSchema={VALIDATION_SCHEMA}
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (

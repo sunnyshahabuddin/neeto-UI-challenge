@@ -23,7 +23,7 @@ const DeleteAlert = ({ refetch, onClose, selectedNote, setSelectedNote }) => {
   return (
     <Alert
       isOpen
-      className="h-52 w-1/2"
+      className="h-52 w-full"
       isSubmitting={deleting}
       message={`Are you sure you want to delete ${title}? This cannot be undone.`}
       title="Delete Note"

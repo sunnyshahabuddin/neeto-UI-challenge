@@ -11,8 +11,8 @@ const DeleteAlert = ({ onClose }) => {
   return (
     <Alert
       isOpen
-      className="h-52 w-1/2"
-      message="Are you sure you want to delete contact? This change cannot be undone."
+      className="h-52 w-full"
+      message="Are you sure you want to delete this contact? This change cannot be undone."
       title="Delete Contact"
       onClose={onClose}
       onSubmit={handleDelete}
