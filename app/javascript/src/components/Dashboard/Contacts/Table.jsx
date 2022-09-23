@@ -4,11 +4,11 @@ import { Table as ContactTable } from "neetoui";
 
 import { ROW_DATA, buildContactTableColumnData } from "./utils";
 
-const Table = () => (
+const Table = ({ setShowDeleteAlert }) => (
   <ContactTable
     allowRowClick
     pagination
-    columnData={buildContactTableColumnData}
+    columnData={buildContactTableColumnData(setShowDeleteAlert)}
     rowData={ROW_DATA}
     onRowClick={() => {}}
   />
