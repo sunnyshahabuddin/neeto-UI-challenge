@@ -4,9 +4,9 @@ import { Pane, Typography } from "neetoui";
 
 import Form from "./Form";
 
-import { NOTES_FORM_INITIAL_FORM_VALUES } from "../constants";
+import { INITIAL_FORM_VALUES } from "../constants";
 
-const NewNotePane = ({ fetchNotes, showPane, setShowPane }) => {
+const Create = ({ fetchNotes, showPane, setShowPane }) => {
   const onClose = () => setShowPane(false);
 
   return (
@@ -18,7 +18,7 @@ const NewNotePane = ({ fetchNotes, showPane, setShowPane }) => {
       </Pane.Header>
       <Form
         isEdit={false}
-        note={NOTES_FORM_INITIAL_FORM_VALUES}
+        note={INITIAL_FORM_VALUES}
         refetch={fetchNotes}
         onClose={onClose}
       />
@@ -26,4 +26,4 @@ const NewNotePane = ({ fetchNotes, showPane, setShowPane }) => {
   );
 };
 
-export default NewNotePane;
+export default Create;

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-import { Formik, Form } from "formik";
+import { Formik, Form as FormikForm } from "formik";
 import { Check } from "neetoicons";
 import { Button, Pane } from "neetoui";
 import { Input, Textarea, Select } from "neetoui/formik";
 
 import notesApi from "apis/notes";
 
-import { NOTES_FORM_VALIDATION_SCHEMA, ROLES, TAGS } from "../constants";
+import { FORM_VALIDATION_SCHEMA, ROLES, TAGS } from "../constants";
 
-const NoteForm = ({ onClose, refetch, note, isEdit }) => {
+const Form = ({ onClose, refetch, note, isEdit }) => {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async values => {
@@ -31,29 +31,28 @@ const NoteForm = ({ onClose, refetch, note, isEdit }) => {
       initialValues={note}
       validateOnBlur={submitted}
       validateOnChange={submitted}
-      validationSchema={NOTES_FORM_VALIDATION_SCHEMA}
+      validationSchema={FORM_VALIDATION_SCHEMA}
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
-        <Form className="w-full">
+        <FormikForm className="w-full">
           <Pane.Body className="space-y-6">
             <Input
-              required
               className="w-full flex-grow-0"
               label="Title"
               name="title"
+              placeholder="Enter note title"
             />
             <Textarea
-              required
               className="w-full flex-grow-0"
               label="Description"
               name="description"
+              placeholder="Enter note description"
               rows={1}
             />
             <Select
               isClearable
               isSearchable
-              required
               className="w-full flex-grow-0"
               label="Assigned Contact"
               name="role"
@@ -64,7 +63,6 @@ const NoteForm = ({ onClose, refetch, note, isEdit }) => {
               isClearable
               isMulti
               isSearchable
-              required
               className="w-full flex-grow-0"
               label="Tags"
               name="tags"
@@ -88,13 +86,14 @@ const NoteForm = ({ onClose, refetch, note, isEdit }) => {
               label="Cancel"
               size="large"
               style="text"
+              type="reset"
               onClick={onClose}
             />
           </Pane.Footer>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );
 };
 
-export default NoteForm;
+export default Form;

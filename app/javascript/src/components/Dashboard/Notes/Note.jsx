@@ -5,22 +5,25 @@ import { Typography, Tag, Avatar, Tooltip, Dropdown } from "neetoui";
 
 import { calculateCreatedAgo, calculateDateToWeekday } from "./utils";
 
+const { Menu, MenuItem } = Dropdown;
+
 const Note = ({ note, setSelectedNote, setShowDeleteAlert }) => (
   <div className="neeto-ui-shadow-xs mb-4 w-full gap-3 space-y-2 border py-2 px-4">
     <div className="flex justify-between ">
       <Typography style="h4">{note.title}</Typography>
       <Dropdown buttonStyle="text" icon={MenuVertical}>
-        <div className="mx-2">
-          <li>Edit</li>
-          <li
+        <Menu>
+          <MenuItem.Button
+            style="danger"
             onClick={() => {
               setSelectedNote(note);
               setShowDeleteAlert(true);
             }}
           >
             Delete
-          </li>
-        </div>
+          </MenuItem.Button>
+          <MenuItem.Button>Edit</MenuItem.Button>
+        </Menu>
       </Dropdown>
     </div>
     <Typography className="neeto-ui-text-gray-600" style="body2">

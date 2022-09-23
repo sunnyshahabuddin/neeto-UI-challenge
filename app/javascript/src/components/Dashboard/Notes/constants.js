@@ -1,7 +1,7 @@
 import { buildSelectOptions } from "utils";
 import * as yup from "yup";
 
-export const NOTES_FORM_INITIAL_FORM_VALUES = {
+export const INITIAL_FORM_VALUES = {
   title: "",
   description: "",
   role: null,
@@ -39,7 +39,7 @@ export const NOTES_TABLE_COLUMN_DATA = [
   },
 ];
 
-export const NOTES_FORM_VALIDATION_SCHEMA = yup.object().shape({
+export const FORM_VALIDATION_SCHEMA = yup.object().shape({
   title: yup.string().required("Title is required"),
   description: yup.string().required("Description is required"),
   role: yup
